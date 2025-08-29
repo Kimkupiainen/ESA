@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bvwd2u45eycl1"]
+[gd_scene load_steps=5 format=3 uid="uid://bvwd2u45eycl1"]
 
 [ext_resource type="PackedScene" uid="uid://cxoaeox37j4wo" path="res://3D assets/cockpit.fbx" id="1_noarx"]
+[ext_resource type="PackedScene" uid="uid://byumttr3q2vft" path="res://3D assets/upperscreens.fbx" id="2_r3fl7"]
+[ext_resource type="PackedScene" uid="uid://dapuwr8j6s381" path="res://3D assets/navigationbase.fbx" id="3_jka67"]
+[ext_resource type="PackedScene" uid="uid://dhm2a2hoh7rvr" path="res://3D assets/navigationball.fbx" id="4_i5arm"]
 
 [node name="Node3D" type="Node3D"]
 
@@ -17,3 +20,11 @@ light_color = Color(0.655875, 0.231621, 0.00222643, 1)
 [node name="OmniLight3D2" type="OmniLight3D" parent="cockpit"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.435236, 1.40815, -0.869133)
 light_color = Color(0.655875, 0.231621, 0.00222643, 1)
+
+[node name="upperscreens" parent="cockpit" instance=ExtResource("2_r3fl7")]
+
+[node name="navigationbase" parent="cockpit" instance=ExtResource("3_jka67")]
+
+[node name="navigationball" parent="cockpit/navigationbase" instance=ExtResource("4_i5arm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0643959, 0.602436, -1.30693)
+rotation_edit_mode = 2
