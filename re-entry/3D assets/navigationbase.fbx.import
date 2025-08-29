@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://7ly08mufbh6r"
-path="res://.godot/imported/computer.fbx-4420be169ab4da49ea38df4dae5cc419.scn"
+uid="uid://dapuwr8j6s381"
+path="res://.godot/imported/navigationbase.fbx-67a3b1293a32d7b5d71798a35ea95959.scn"
 
 [deps]
 
-source_file="res://computer.fbx"
-dest_files=["res://.godot/imported/computer.fbx-4420be169ab4da49ea38df4dae5cc419.scn"]
+source_file="res://3D assets/navigationbase.fbx"
+dest_files=["res://.godot/imported/navigationbase.fbx-67a3b1293a32d7b5d71798a35ea95959.scn"]
 
 [params]
 
