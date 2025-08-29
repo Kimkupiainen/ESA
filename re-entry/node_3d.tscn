@@ -1,15 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://bvwd2u45eycl1"]
+[gd_scene load_steps=2 format=3 uid="uid://bvwd2u45eycl1"]
 
 [ext_resource type="PackedScene" uid="uid://cxoaeox37j4wo" path="res://3D assets/cockpit.fbx" id="1_noarx"]
-[ext_resource type="PackedScene" uid="uid://7ly08mufbh6r" path="res://3D assets/computer.fbx" id="2_a0tk4"]
 
 [node name="Node3D" type="Node3D"]
 
-[node name="cockpit" parent="." instance=ExtResource("1_noarx")]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 22.3334, 25.2451, 41.159)
-
-[node name="computer" parent="." instance=ExtResource("2_a0tk4")]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 22.6438, 24.2432, 34.3072)
-
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0526, 29.406, 38.2004)
+
+[node name="cockpit" parent="." instance=ExtResource("1_noarx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0466, 28.492, 38.0433)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="cockpit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.536585, 1.40815, -0.869133)
+light_color = Color(0.655875, 0.231621, 0.00222643, 1)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="cockpit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.435236, 1.40815, -0.869133)
+light_color = Color(0.655875, 0.231621, 0.00222643, 1)
