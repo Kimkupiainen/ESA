@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2bwltf8vubvp"
-path.s3tc="res://.godot/imported/cockpit_DefaultMaterial_AlbedoTransparency.png-a1b3ada9b5a51799a35da8f6f835f096.s3tc.ctex"
+uid="uid://dmbighn6kuly"
+path.s3tc="res://.godot/imported/sphere.png-f8f2376155b148983d4e543ac0972adb.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/cockpit_DefaultMaterial_AlbedoTransparency.png"
-dest_files=["res://.godot/imported/cockpit_DefaultMaterial_AlbedoTransparency.png-a1b3ada9b5a51799a35da8f6f835f096.s3tc.ctex"]
+source_file="res://Textures/sphere.png"
+dest_files=["res://.godot/imported/sphere.png-f8f2376155b148983d4e543ac0972adb.s3tc.ctex"]
 
 [params]
 

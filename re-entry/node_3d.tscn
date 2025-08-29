@@ -26,5 +26,5 @@ light_color = Color(0.655875, 0.231621, 0.00222643, 1)
 [node name="navigationbase" parent="cockpit" instance=ExtResource("3_jka67")]
 
 [node name="navigationball" parent="cockpit/navigationbase" instance=ExtResource("4_i5arm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0643959, 0.602436, -1.30693)
+transform = Transform3D(0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 rotation_edit_mode = 2
