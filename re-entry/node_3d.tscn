@@ -1,30 +1,108 @@
-[gd_scene load_steps=5 format=3 uid="uid://bvwd2u45eycl1"]
+[gd_scene load_steps=16 format=3 uid="uid://bvwd2u45eycl1"]
 
-[ext_resource type="PackedScene" uid="uid://cxoaeox37j4wo" path="res://3D assets/cockpit.fbx" id="1_noarx"]
-[ext_resource type="PackedScene" uid="uid://byumttr3q2vft" path="res://3D assets/upperscreens.fbx" id="2_r3fl7"]
-[ext_resource type="PackedScene" uid="uid://dapuwr8j6s381" path="res://3D assets/navigationbase.fbx" id="3_jka67"]
-[ext_resource type="PackedScene" uid="uid://dhm2a2hoh7rvr" path="res://3D assets/navigationball.fbx" id="4_i5arm"]
+[ext_resource type="Texture2D" uid="uid://b2bwltf8vubvp" path="res://Textures/cockpit_DefaultMaterial_AlbedoTransparency.png" id="1_4arys"]
+[ext_resource type="ArrayMesh" uid="uid://c4punb6jsq7rk" path="res://3D assets/cockpit.obj" id="2_6iypd"]
+[ext_resource type="ArrayMesh" uid="uid://cusmd3ltv208r" path="res://3D assets/screens.obj" id="3_tereu"]
+[ext_resource type="ArrayMesh" uid="uid://0ahdbck8yvxa" path="res://3D assets/gasbase.obj" id="4_cdqbm"]
+[ext_resource type="ArrayMesh" uid="uid://xux24elcn5qe" path="res://3D assets/gashandle.obj" id="5_imku0"]
+[ext_resource type="ArrayMesh" uid="uid://4hmydprlukpe" path="res://3D assets/navigationbase.obj" id="6_wlxy5"]
+[ext_resource type="Texture2D" uid="uid://dmbighn6kuly" path="res://Textures/sphere.png" id="7_3v7ru"]
+[ext_resource type="ArrayMesh" uid="uid://c38di3fs8flo4" path="res://3D assets/ball.obj" id="8_tcnuu"]
+[ext_resource type="ArrayMesh" uid="uid://bc6qt3daglgsg" path="res://3D assets/killswitch.obj" id="9_tuemg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i0g27"]
+albedo_texture = ExtResource("1_4arys")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ealrb"]
+albedo_texture = ExtResource("1_4arys")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jsnrv"]
+albedo_texture = ExtResource("1_4arys")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lggff"]
+albedo_texture = ExtResource("1_4arys")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0gvp"]
+albedo_texture = ExtResource("7_3v7ru")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxd74"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.804743, 0.804743, 0.804743, 1)
+emission_energy_multiplier = 10.95
+emission_operator = 1
+ao_enabled = true
+ao_light_affect = 0.38
 
 [node name="Node3D" type="Node3D"]
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0526, 29.406, 38.2004)
 
-[node name="cockpit" parent="." instance=ExtResource("1_noarx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.0466, 28.492, 38.0433)
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.1312, 28.4933, 38.068)
+material_override = SubResource("StandardMaterial3D_i0g27")
+mesh = ExtResource("2_6iypd")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="cockpit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.536585, 1.40815, -0.869133)
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="MeshInstance3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0262566, -0.0234814, 0.0514412)
+mesh = ExtResource("3_tereu")
+skeleton = NodePath("../..")
+
+[node name="Gasbase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.015, 29.0195, 36.7777)
+material_override = SubResource("StandardMaterial3D_ealrb")
+mesh = ExtResource("4_cdqbm")
+skeleton = NodePath("")
+
+[node name="GasLever" type="MeshInstance3D" parent="Gasbase"]
+transform = Transform3D(1, 0, 0, 0, 0.9995, 0.0316201, 0, -0.0316201, 0.9995, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jsnrv")
+mesh = ExtResource("5_imku0")
+skeleton = NodePath("")
+
+[node name="Turnbase" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 22.3594, 29.0195, 36.7777)
+material_override = SubResource("StandardMaterial3D_ealrb")
+mesh = ExtResource("4_cdqbm")
+skeleton = NodePath("")
+
+[node name="Turnthing" type="MeshInstance3D" parent="Turnbase"]
+transform = Transform3D(1, 0, 0, 0, 0.9995, 0.0316201, 0, -0.0316201, 0.9995, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_jsnrv")
+mesh = ExtResource("5_imku0")
+skeleton = NodePath("")
+
+[node name="NaviBase" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.133, 29.0195, 36.7777)
+material_override = SubResource("StandardMaterial3D_lggff")
+mesh = ExtResource("6_wlxy5")
+skeleton = NodePath("")
+
+[node name="NaviBall" type="MeshInstance3D" parent="NaviBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0494175, 0)
+material_override = SubResource("StandardMaterial3D_s0gvp")
+mesh = ExtResource("8_tcnuu")
+skeleton = NodePath("")
+
+[node name="NaviBase2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.2485, 29.0195, 36.7777)
+material_override = SubResource("StandardMaterial3D_lggff")
+mesh = ExtResource("6_wlxy5")
+skeleton = NodePath("")
+
+[node name="NaviBall" type="MeshInstance3D" parent="NaviBase2"]
+transform = Transform3D(0.0449553, 0, 0, 0, 0.0449553, 0, 0, 0, 0.0449553, 0, 0.0494175, 0)
+material_override = SubResource("StandardMaterial3D_vxd74")
+mesh = ExtResource("9_tuemg")
+skeleton = NodePath("")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.6078, 29.9002, 37.8572)
 light_color = Color(0.655875, 0.231621, 0.00222643, 1)
+shadow_enabled = true
 
-[node name="OmniLight3D2" type="OmniLight3D" parent="cockpit"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.435236, 1.40815, -0.869133)
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5796, 29.9002, 37.8572)
 light_color = Color(0.655875, 0.231621, 0.00222643, 1)
-
-[node name="upperscreens" parent="cockpit" instance=ExtResource("2_r3fl7")]
-
-[node name="navigationbase" parent="cockpit" instance=ExtResource("3_jka67")]
-
-[node name="navigationball" parent="cockpit/navigationbase" instance=ExtResource("4_i5arm")]
-transform = Transform3D(0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
-rotation_edit_mode = 2
+shadow_enabled = true
