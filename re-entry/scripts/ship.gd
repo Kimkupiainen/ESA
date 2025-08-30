@@ -2,9 +2,9 @@ extends Node
 
 const PHYS_UPDATE_FREQ: int = 10
 
-@export var start_velocity: Vector3 = Vector3(0, -1000, 0) # meters
+@export var start_velocity: Vector3 = Vector3(0, -10000, 0) # meters
 @export var start_rotation: Vector3 = Vector3(0, 0, 0) # radians!
-@export var start_position: Vector3 = Vector3(0, 6401000, 0) # meters
+@export var start_position: Vector3 = Vector3(0, 6571000, 0) # meters
 
 @export var start_dry_mass: float = 800 # kg
 @export var start_fuel_mass: float = 1000 # kg
@@ -118,6 +118,8 @@ func _physics_process(delta: float) -> void:
 	var to_center = -position.normalized()
 	velocity += to_center * gravity * phys_delta
 	
+	var free_fall_vel = velocity
+	
 	# atm. drag
 	var drag_accel = self.get_drag() / self.get_mass()
 	velocity -= velocity.normalized() * drag_accel * phys_delta
@@ -150,6 +152,10 @@ func _physics_process(delta: float) -> void:
 		velocity += phys_delta * used_ratio * self.get_up_vec() * (self.get_thrust() / self.get_mass())
 	
 	position += velocity * phys_delta
+	
+	var vel_change = velocity - free_fall_vel
+	var g_force = clamp(vel_change.length() / (phys_delta * 9.81), 0, 100)
+	
 	phys_delta = 0
 	
 	debug_label.text = "mass: %f kg\n" % self.get_mass()
@@ -162,3 +168,4 @@ func _physics_process(delta: float) -> void:
 	debug_label.text += "elevation: %f m\n" % self.get_elevation()
 	debug_label.text += "atm: %f kg/m^3\n" % self.get_atmosphere_density()
 	debug_label.text += "drag: %f N\n" % self.get_drag()
+	debug_label.text += "strain: %f G\n" % g_force
