@@ -13,3 +13,27 @@ shader = ExtResource("1_4n3el")
 mesh = SubResource("SphereMesh_74lek")
 surface_material_override/0 = SubResource("ShaderMaterial_j5jx5")
 script = ExtResource("2_66jx4")
+
+[node name="Label0" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.51)
+text = "0"
+font_size = 12
+outline_size = 8
+
+[node name="Label180" type="Label3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.51)
+text = "180"
+font_size = 12
+outline_size = 8
+
+[node name="Label90" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.51, 0, 0)
+text = "90"
+font_size = 12
+outline_size = 8
+
+[node name="Label270" type="Label3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0.51, 0, 0)
+text = "270"
+font_size = 12
+outline_size = 8
