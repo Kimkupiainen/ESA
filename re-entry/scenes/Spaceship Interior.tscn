@@ -1,9 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://bvwd2u45eycl1"]
+[gd_scene load_steps=15 format=3 uid="uid://bvwd2u45eycl1"]
 
 [ext_resource type="Material" uid="uid://b4c5s5op6kskf" path="res://cockpit.tres" id="1_48p0c"]
 [ext_resource type="ArrayMesh" uid="uid://c4punb6jsq7rk" path="res://3D assets/cockpit.obj" id="2_2mfr0"]
 [ext_resource type="ArrayMesh" uid="uid://cusmd3ltv208r" path="res://3D assets/screens.obj" id="3_rbj00"]
-[ext_resource type="Texture2D" uid="uid://508b72m8l83q" path="res://icon.svg" id="4_2mfr0"]
+[ext_resource type="ArrayMesh" uid="uid://cn583l47stnre" path="res://3D assets/screenrenderers.obj" id="4_2mfr0"]
 [ext_resource type="ArrayMesh" uid="uid://0ahdbck8yvxa" path="res://3D assets/gasbase.obj" id="4_qm046"]
 [ext_resource type="ArrayMesh" uid="uid://xux24elcn5qe" path="res://3D assets/gashandle.obj" id="5_13ivy"]
 [ext_resource type="ArrayMesh" uid="uid://4hmydprlukpe" path="res://3D assets/navigationbase.obj" id="6_yt80c"]
@@ -11,6 +11,8 @@
 [ext_resource type="ArrayMesh" uid="uid://c38di3fs8flo4" path="res://3D assets/ball.obj" id="8_ws74h"]
 [ext_resource type="ArrayMesh" uid="uid://bc6qt3daglgsg" path="res://3D assets/killswitch.obj" id="9_ar6yu"]
 [ext_resource type="Script" uid="uid://w13h4ff5cnfg" path="res://node_3d.gd" id="10_6p6tm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_2mfr0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s0gvp"]
 albedo_texture = ExtResource("7_1ri8f")
@@ -41,13 +43,84 @@ material_override = ExtResource("1_48p0c")
 mesh = ExtResource("3_rbj00")
 skeleton = NodePath("../..")
 
-[node name="KorvaaUI_lla" type="Sprite3D" parent="Cockpit"]
-transform = Transform3D(0.927804, 0, 0, 0, 0.354266, -0.239286, 0, 0.110993, 0.763751, -0.0247135, 1.33016, -1.28477)
-texture = ExtResource("4_2mfr0")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Cockpit/Screens"]
+sorting_use_aabb_center = false
+mesh = ExtResource("4_2mfr0")
 
-[node name="KorvaaUI_lla2" type="Sprite3D" parent="Cockpit"]
-transform = Transform3D(0.472052, 0.0496616, 0.509217, 0.00598347, 0.362404, -0.173474, -0.403878, 0.0634134, 0.592602, -0.995489, 1.33004, -0.983781)
-texture = ExtResource("4_2mfr0")
+[node name="SubViewport" type="SubViewport" parent="Cockpit/Screens/MeshInstance3D"]
+handle_input_locally = false
+size_2d_override_stretch = true
+
+[node name="ElectricitySymbol" type="Label" parent="Cockpit/Screens/MeshInstance3D/SubViewport"]
+offset_left = 20.345
+offset_right = 90.345
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 51
+text = "⚡"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ElectricitySlider" type="VSlider" parent="Cockpit/Screens/MeshInstance3D/SubViewport"]
+material = SubResource("CanvasItemMaterial_2mfr0")
+anchors_preset = -1
+anchor_top = 0.022
+anchor_bottom = 0.291
+offset_top = 57.665
+offset_right = 35.14
+offset_bottom = 77.705
+scale = Vector2(3.095, 0.685)
+value = 100.0
+rounded = true
+editable = false
+scrollable = false
+
+[node name="OxygenSymbol" type="Label" parent="Cockpit/Screens/MeshInstance3D/SubViewport"]
+offset_left = 111.63
+offset_right = 181.63
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 51
+text = "O"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OxygenSlider" type="VSlider" parent="Cockpit/Screens/MeshInstance3D/SubViewport"]
+material = SubResource("CanvasItemMaterial_2mfr0")
+anchors_preset = -1
+anchor_top = 0.022
+anchor_bottom = 0.291
+offset_left = 93.51
+offset_top = 57.665
+offset_right = 128.65
+offset_bottom = 77.705
+scale = Vector2(3.095, 0.685)
+value = 100.0
+rounded = true
+editable = false
+scrollable = false
+
+[node name="RocketSymbol" type="Label" parent="Cockpit/Screens/MeshInstance3D/SubViewport"]
+offset_left = 207.51
+offset_right = 277.51
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 51
+text = "🚀"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RocketSlider" type="VSlider" parent="Cockpit/Screens/MeshInstance3D/SubViewport"]
+material = SubResource("CanvasItemMaterial_2mfr0")
+anchors_preset = -1
+anchor_top = 0.022
+anchor_bottom = 0.291
+offset_left = 181.89
+offset_top = 57.665
+offset_right = 217.03
+offset_bottom = 77.705
+scale = Vector2(3.095, 0.685)
+value = 100.0
+rounded = true
+editable = false
+scrollable = false
 
 [node name="Gasbase" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21.9172, 29.0195, 36.7777)
@@ -151,3 +224,6 @@ script = ExtResource("10_6p6tm")
 debug_state = 2
 alarm_color = Color(0.846906, 0.395857, 0.258386, 1)
 boot_duration = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.226, 29.3079, 37.3926)
