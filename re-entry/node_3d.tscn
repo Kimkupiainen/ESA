@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bvwd2u45eycl1"]
+[gd_scene load_steps=16 format=3 uid="uid://c8q8hf5ydxooh"]
 
 [ext_resource type="Material" uid="uid://b4c5s5op6kskf" path="res://cockpit.tres" id="1_4arys"]
 [ext_resource type="ArrayMesh" uid="uid://c4punb6jsq7rk" path="res://3D assets/cockpit.obj" id="2_6iypd"]
