@@ -34,9 +34,13 @@ const PHYS_UPDATE_FREQ: int = 10
 # assume some simple log falloff
 @export var atmosphere_density_curve: Vector2 = Vector2(1.29, 0) # kg/m^3
 
-@onready var nav_ball: Node3D = $NavBall
-
 @onready var debug_label: Label = $DebugLabel
+
+signal position_changed
+signal velocity_changed
+signal rotation_changed
+signal fuel_changed
+signal heat_changed
 
 var velocity: Vector3
 var orientation: Quaternion
@@ -153,8 +157,16 @@ func _physics_process(delta: float) -> void:
 	
 	position += velocity * phys_delta
 	
+	# strain
 	var vel_change = velocity - free_fall_vel
 	var g_force = clamp(vel_change.length() / (phys_delta * 9.81), 0, 100)
+	
+	# let other scripts know we've updated stuff
+	position_changed.emit(position)
+	velocity_changed.emit(velocity)
+	rotation_changed.emit(orientation)
+	fuel_changed.emit(fuel_mass)
+	heat_changed.emit(heat_energy)
 	
 	phys_delta = 0
 	
