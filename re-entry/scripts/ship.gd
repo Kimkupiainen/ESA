@@ -24,6 +24,9 @@ const PHYS_UPDATE_FREQ: int = 10
 @export var thrust_curve: Vector2 = Vector2(20000, 30000) # newtons
 @export var thrust_fuel_drain: float = 10 # kg/s
 
+@export var turn_fuel_drain: float = 1 # kg/s
+@export var turn_speed: float = 0.1 # radians / s
+
 @export var gravity: float = 9.81 # meters/s^2
 
 @export var planet_radius: float = 6371000 # meters
@@ -52,6 +55,10 @@ var heatshield_mass: float
 var heat_energy: float
 
 var is_thrusting: bool
+var is_turning_fwd: bool
+var is_turning_back: bool
+var is_turning_left: bool
+var is_turning_right: bool
 
 var phys_delta: float = 0
 
@@ -107,10 +114,11 @@ func _ready():
 
 func _process(delta: float) -> void:
 	# TODO these are temporary inputs
-	if Input.is_action_pressed("ui_select"):
-		is_thrusting = true
-	else:
-		is_thrusting = false
+	is_thrusting = Input.is_action_pressed("ui_select")
+	is_turning_fwd = Input.is_action_pressed("ui_up")
+	is_turning_back = Input.is_action_pressed("ui_down")
+	is_turning_left = Input.is_action_pressed("ui_left")
+	is_turning_right = Input.is_action_pressed("ui_right")
 
 func _physics_process(delta: float) -> void:
 	# avoid FP32 precision issues :(
@@ -154,6 +162,23 @@ func _physics_process(delta: float) -> void:
 		var used_ratio = used_fuel / wanted_fuel
 		fuel_mass -= used_fuel
 		velocity += phys_delta * used_ratio * self.get_up_vec() * (self.get_thrust() / self.get_mass())
+	
+	# rotation thrusters
+	var turn_dir = Vector2(
+		1 if is_turning_fwd else 0 + -1 if is_turning_back else 0,
+		1 if is_turning_left else 0 + -1 if is_turning_right else 0
+	)
+	if turn_dir.length_squared() > 0.1 and fuel_mass > 0:
+		var wanted_fuel = turn_fuel_drain * phys_delta * (abs(turn_dir.x) + abs(turn_dir.y))
+		var used_fuel = min(fuel_mass, wanted_fuel)
+		var used_ratio = used_fuel / wanted_fuel
+		fuel_mass -= used_fuel
+		var rotation_change = used_ratio * turn_speed
+		orientation *= Quaternion.from_euler(Vector3(
+			rotation_change * turn_dir.x,
+			rotation_change * turn_dir.y,
+			0
+		))
 	
 	position += velocity * phys_delta
 	
