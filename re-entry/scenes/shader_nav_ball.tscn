@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=3 uid="uid://c2dr10ctsdn4u"]
+
+[ext_resource type="Shader" uid="uid://bmk2bn3qsktwy" path="res://shaders/navball.gdshader" id="1_4n3el"]
+[ext_resource type="Script" uid="uid://banrw6a7h6xoj" path="res://scripts/navball.gd" id="2_66jx4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_74lek"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5jx5"]
+render_priority = 0
+shader = ExtResource("1_4n3el")
+
+[node name="ShaderNavBall" type="MeshInstance3D"]
+mesh = SubResource("SphereMesh_74lek")
+surface_material_override/0 = SubResource("ShaderMaterial_j5jx5")
+script = ExtResource("2_66jx4")
