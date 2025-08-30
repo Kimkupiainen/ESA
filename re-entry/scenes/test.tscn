@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c4bvc8k47nr73" path="res://scripts/ship.gd" id="1_bl13t"]
 [ext_resource type="PackedScene" uid="uid://c0hj78oa05w0x" path="res://scenes/character.tscn" id="1_errlg"]
-[ext_resource type="Shader" uid="uid://bmk2bn3qsktwy" path="res://shaders/test_nav.gdshader" id="3_74lek"]
+[ext_resource type="Shader" uid="uid://bmk2bn3qsktwy" path="res://shaders/navball.gdshader" id="3_74lek"]
 [ext_resource type="Script" uid="uid://banrw6a7h6xoj" path="res://scripts/navball.gd" id="3_iyx0m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_ij1v8"]
