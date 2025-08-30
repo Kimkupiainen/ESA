@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://df2fge2h7jxec"]
+
+[ext_resource type="Script" uid="uid://c4bvc8k47nr73" path="res://scripts/ship.gd" id="1_l1v76"]
+[ext_resource type="PackedScene" uid="uid://c0hj78oa05w0x" path="res://scenes/character.tscn" id="2_ct7aa"]
+[ext_resource type="PackedScene" uid="uid://c2dr10ctsdn4u" path="res://scenes/shader_nav_ball.tscn" id="3_ocj2s"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ij1v8"]
+
+[node name="Ship" type="Node3D"]
+script = ExtResource("1_l1v76")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.34036, 0, 0, 0, 1, 0, 0, 0, 4.34036, 0, 0, 0)
+mesh = SubResource("BoxMesh_ij1v8")
+
+[node name="Character" parent="." instance=ExtResource("2_ct7aa")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25255, 0)
+
+[node name="DebugLabel" type="Label" parent="."]
+offset_right = 326.0
+offset_bottom = 180.0
+text = "a
+b
+c"
+
+[node name="ShaderNavBall" parent="." instance=ExtResource("3_ocj2s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1338, -1.56467)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.355564, 0.934652, 0, -0.934652, 0.355564, 0, 0, 0)
