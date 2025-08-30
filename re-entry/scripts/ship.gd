@@ -1,5 +1,7 @@
 extends Node
 
+const PHYS_UPDATE_FREQ: int = 10
+
 @export var start_velocity: Vector3 = Vector3(0, -1000, 0) # meters
 @export var start_rotation: Vector3 = Vector3(0, 0, 0) # degrees
 @export var start_position: Vector3 = Vector3(0, 6571000, 0) # meters
@@ -36,6 +38,8 @@ var dry_mass: float
 var fuel_mass: float
 
 var is_thrusting: bool
+
+var phys_delta: float = 0
 
 func get_sea_level() -> float:
 	return planet_radius
@@ -91,22 +95,29 @@ func _process(delta: float) -> void:
 		is_thrusting = false
 
 func _physics_process(delta: float) -> void:
+	# avoid FP32 precision issues :(
+	phys_delta += delta
+	if phys_delta < 1.0 / PHYS_UPDATE_FREQ:
+		return
+	
 	var to_center = -position.normalized()
-	velocity += to_center * gravity * delta
+	velocity += to_center * gravity * phys_delta
 	
 	var drag_accel = self.get_drag() / self.get_mass()
-	velocity -= velocity.normalized() * drag_accel * delta
+	velocity -= velocity.normalized() * drag_accel * phys_delta
 	
 	if is_thrusting and fuel_mass > 0:
-		var wanted_fuel = thrust_fuel_drain * delta
+		var wanted_fuel = thrust_fuel_drain * phys_delta
 		var used_fuel = min(fuel_mass, wanted_fuel)
 		var used_ratio = used_fuel / wanted_fuel
 		fuel_mass -= used_fuel
 
 		var up = (orientation * Vector3(0, 1, 0)).normalized()
-		velocity += delta * used_ratio * up * (self.get_thrust() / self.get_mass())
+		velocity += phys_delta * used_ratio * up * (self.get_thrust() / self.get_mass())
 	
-	position += velocity * delta
+	position += velocity * phys_delta
+	
+	phys_delta = 0
 	
 	debug_label.text = "mass: %f kg\n" % self.get_mass()
 	debug_label.text += "thrusting: %s, force: %f N\n" % [is_thrusting, self.get_thrust()]
